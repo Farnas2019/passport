@@ -9,6 +9,7 @@ const MongoStore = require('connect-mongo');
 const connectDB = require("./config/db");
 
 const authRouter = require('./router/auth');
+
 dotenv.config({ path: "./config/config.env" });
 
 // Passport config
@@ -53,13 +54,7 @@ app.use(
 // Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
-passport.serializeUser((user, done) => {
-  done(null, user.id)
-})
 
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => done(err, user))
-})
 
 // Set global var
 app.use(function (req, res, next) {
