@@ -78,8 +78,8 @@ module.exports = function (passport) {
       const newUser = {
         githubId: profile.id,
         displayName: profile.displayName,
-        firstName: profile.give_name,
-        lastName: profile.name,
+        firstName: profile.name,
+        lastName: profile.sername,
         image: profile.photos[0].value
       }
 

@@ -7,7 +7,7 @@ router.get("/google", passport.authenticate("google", { scope: ["profile", "emai
 router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
   (req, res) => {
-    res.redirect(process.env.CLIENT_HOME_PAGE_URL);
+    res.redirect("/api/v1/auth/login/success");
   }
 )
 
@@ -18,18 +18,18 @@ router.get('/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/' }),
   function (req, res) {
     // Successful authentication, redirect home.
-    res.redirect(process.env.CLIENT_HOME_PAGE_URL);
+    res.redirect("/api/v1/auth/login/success");
   });
 
-router.get("/github", passport.authenticate("github",
-
-  { scope: ['user'] }));
+router.get("/github", passport.authenticate("github", { scope: ['user:email'] }));
 
 router.get('/github/callback',
   passport.authenticate('github', { failureRedirect: '/' }),
+
   function (req, res) {
+
     // Successful authentication, redirect home.
-    res.redirect(process.env.CLIENT_HOME_PAGE_URL);
+    res.redirect("/api/v1/auth/login/success");
   });
 
 router.get("/login/success", (req, res) => {
